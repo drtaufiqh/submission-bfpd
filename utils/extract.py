@@ -32,20 +32,16 @@ def extract_product_data(card):
     details = card.find('div', class_='product-details')
 
     title = details.find('h3').text
-    print(details)
+    
     price = details.find('div', class_="price-container")
-    print(price)
+    informations = details.find_all('p')
     if price:
         price = price.find('span', class_="price").text
-        informations = details.find_all('p')
-
         rating = informations[0].text
         colors = informations[1].text
         size = informations[2].text
         gender = informations[3].text
     else:
-        informations = details.find_all('p')
-
         price = informations[0].text
         rating = informations[1].text
         colors = informations[2].text

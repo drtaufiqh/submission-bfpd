@@ -20,6 +20,7 @@ def main():
             DataFrame = transform_data(all_products_data, NILAI_TUKAR)
             print(DataFrame)
             print(DataFrame.isnull().sum())
+            print(DataFrame.info())
  
             # # 3. Load Data
             # load_data(DataFrame)

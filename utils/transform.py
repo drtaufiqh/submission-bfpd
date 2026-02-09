@@ -20,13 +20,10 @@ def transform_price(data):
     data = remove_text(data, 'Price', ['$'])
     
     # definisikan null
-    data = set_null(data, 'Price', ['Price Unavailable'])
+    data = set_null(data, 'Price', ['Price Unavailable', None])
     
     # ubah ke float
     data['Price'] = pd.to_numeric(data['Price'])
-    
-    # imputasi missing value dengan median
-    data["Price"] = data["Price"].fillna(data["Price"].median())
     
     return data
 
@@ -40,9 +37,6 @@ def transform_rating(data):
     # ubah ke float
     data['Rating'] = pd.to_numeric(data['Rating'])
 
-    # imputasi missing value dengan median
-    data["Rating"] = data["Rating"].fillna(data["Rating"].median())
-
     return data
 
 def transform_colors(data):
@@ -55,9 +49,6 @@ def transform_colors(data):
     # ubah ke int
     data['Colors'] = data['Colors'].astype(int)
 
-    # imputasi missing value dengan median
-    data["Colors"] = data["Colors"].fillna(data["Colors"].median())
-
     return data
 
 def transform_size(data):
@@ -68,6 +59,11 @@ def transform_size(data):
 def transform_gender(data):
     # hapus text tak terpakai
     data = remove_text(data, 'Gender', ['Gender: '])
+    return data
+
+def transform_title(data):
+    # definisikan null
+    data = set_null(data, 'Title', ['Unknown Product'])
     return data
 
 def transform_data(data, exchange_rate):
@@ -94,6 +90,14 @@ def transform_data(data, exchange_rate):
     # Transformasi Gender
     data = transform_gender(data)
     print('Berhasil Transform Gender')
+
+    # Transformasi Title
+    data = transform_title(data)
+    print('Berhasil Transform Title')
+
+    # Hapus Missing Value
+    data = data.dropna()
+    print('Berhasil Menghaspus Baris dengan Missing Value')
     
     # Transformasi Exchange Rate
     data['Price_in_rupiah'] = (data['Price'] * exchange_rate).astype(int)
@@ -106,6 +110,6 @@ def transform_data(data, exchange_rate):
     data['Size'] = data['Size'].astype('string')
     data['Gender'] = data['Gender'].astype('string')
 
-    print('Berhasil Transform Data!')
+    print('Berhasil Transformasi Seluruh Data!')
     
     return data
