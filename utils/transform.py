@@ -101,7 +101,7 @@ def transform_data(data, exchange_rate):
         print('Berhasil Menghaspus Baris dengan Missing Value')
         
         # Transformasi Exchange Rate
-        data['Price'] = (data['Price'] * exchange_rate).astype(int)
+        data['Price'] = (data['Price'] * exchange_rate)
         
         # Transformasi Tipe Data
         data['Title'] = data['Title'].astype('string')

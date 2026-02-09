@@ -18,7 +18,7 @@ credentials = Credentials.from_service_account_file(
 def load_to_csv(data, path):
     """Fungsi untuk menyimpan data ke dalam CSV"""
     data.to_csv(path, index=False)
-    print("Data berhasil disimpan di CSV:" + path)
+    print("Data berhasil disimpan di CSV.")
  
 def load_to_postgre(data, db_url):
     """Fungsi untuk menyimpan data ke dalam PostgreSQL."""
