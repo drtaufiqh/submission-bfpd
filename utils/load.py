@@ -32,33 +32,40 @@ def load_to_postgre(data, db_url):
             print("Data berhasil disimpan di PostgreSQL")
     
     except Exception as e:
-        print(f"Terjadi kesalahan saat menyimpan data: {e}")
+        print(f"Gagal menyimpan ke PostgreSQL: {e}")
 
 def load_to_spreadsheets(data):
-    service = build('sheets', 'v4', credentials=credentials)
-    sheet = service.spreadsheets()
+    """Fungsi untuk menyimpan data ke dalam Google Sheets"""
+    try:
+        service = build('sheets', 'v4', credentials=credentials)
+        sheet = service.spreadsheets()
 
-    # khusus timestamp
-    data['Timestamp'] = data['Timestamp'].astype(str)
+        # khusus timestamp
+        data['Timestamp'] = data['Timestamp'].astype(str)
 
-    headers = data.columns.tolist()
-    values = data.values.tolist()
+        headers = data.columns.tolist()
+        values = data.values.tolist()
 
-    body = {
-        "values": [headers] + values
-    }
+        body = {
+            "values": [headers] + values
+        }
 
-    sheet.values().update(
-        spreadsheetId=SPREADSHEET_ID,
-        range='Sheet1!A1',
-        valueInputOption='RAW',
-        body=body
-    ).execute()
+        sheet.values().update(
+            spreadsheetId=SPREADSHEET_ID,
+            range='Sheet1!A1',
+            valueInputOption='RAW',
+            body=body
+        ).execute()
 
-    print("Data berhasil disimpan di Google Sheets!")
+        print("Data berhasil disimpan di Google Sheets.")
+
+    except Exception as e:
+        print(f"Gagal menyimpan ke Google Sheets: {e}")
 
 def load_data(data, path, db_url):
-    print(data)
-    load_to_csv(data, path)
-    load_to_spreadsheets(data)
-    load_to_postgre(data, db_url)
+    try:
+        load_to_csv(data, path)
+        load_to_spreadsheets(data)
+        load_to_postgre(data, db_url)
+    except Exception as e:
+        print(f"Terjadi kesalahan pada proses load: {e}")

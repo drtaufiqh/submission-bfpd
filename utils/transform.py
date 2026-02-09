@@ -68,45 +68,50 @@ def transform_title(data):
 
 def transform_data(data, exchange_rate):
     """Menggabungkan semua transformasi data menjadi satu fungsi."""
-    # Ubah dari dataframe
-    data = transform_to_DataFrame(data)
+    try:
+        # Ubah dari dataframe
+        data = transform_to_DataFrame(data)
 
-    # Transformasi Price
-    data = transform_price(data)
-    print('Berhasil Transform Price')
+        # Transformasi Price
+        data = transform_price(data)
+        print('Berhasil Transform Price')
+        
+        # Transformasi Rating
+        data = transform_rating(data)
+        print('Berhasil Transform Rating')
+
+        # Transformasi Colors
+        data = transform_colors(data)
+        print('Berhasil Transform Colors')
+
+        # Transformasi Size
+        data = transform_size(data)
+        print('Berhasil Transform Size')
+
+        # Transformasi Gender
+        data = transform_gender(data)
+        print('Berhasil Transform Gender')
+
+        # Transformasi Title
+        data = transform_title(data)
+        print('Berhasil Transform Title')
+
+        # Hapus Missing Value
+        data = data.dropna()
+        print('Berhasil Menghaspus Baris dengan Missing Value')
+        
+        # Transformasi Exchange Rate
+        data['Price'] = (data['Price'] * exchange_rate).astype(int)
+        
+        # Transformasi Tipe Data
+        data['Title'] = data['Title'].astype('string')
+        data['Size'] = data['Size'].astype('string')
+        data['Gender'] = data['Gender'].astype('string')
+
+        print('Berhasil Transformasi Seluruh Data!')
     
-    # Transformasi Rating
-    data = transform_rating(data)
-    print('Berhasil Transform Rating')
-
-    # Transformasi Colors
-    data = transform_colors(data)
-    print('Berhasil Transform Colors')
-
-    # Transformasi Size
-    data = transform_size(data)
-    print('Berhasil Transform Size')
-
-    # Transformasi Gender
-    data = transform_gender(data)
-    print('Berhasil Transform Gender')
-
-    # Transformasi Title
-    data = transform_title(data)
-    print('Berhasil Transform Title')
-
-    # Hapus Missing Value
-    data = data.dropna()
-    print('Berhasil Menghaspus Baris dengan Missing Value')
+        return data
     
-    # Transformasi Exchange Rate
-    data['Price'] = (data['Price'] * exchange_rate).astype(int)
-    
-    # Transformasi Tipe Data
-    data['Title'] = data['Title'].astype('string')
-    data['Size'] = data['Size'].astype('string')
-    data['Gender'] = data['Gender'].astype('string')
-
-    print('Berhasil Transformasi Seluruh Data!')
-    
-    return data
+    except Exception as e:
+        print(f"Terjadi kesalahan pada proses transform: {e}")
+        return pd.DataFrame()
