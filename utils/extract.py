@@ -85,11 +85,14 @@ def scrape_product(base_url, start_page=1, delay=2):
                 data.append(product)
  
             next_button = soup.find('li', class_='next')
-            if next_button:
+            # apakah punya class 'disabled'
+            is_disable = 'disabled' in next_button.get('class', [])
+
+            if not is_disable:
                 page_number += 1
-                time.sleep(delay) # Delay sebelum halaman berikutnya
+                time.sleep(delay)  # Delay sebelum halaman berikutnya
             else:
-                break # Berhenti jika sudah tidak ada next button
+                break  # Berhenti jika sudah tidak ada next button
         else:
             break # Berhenti jika ada kesalahan
  
