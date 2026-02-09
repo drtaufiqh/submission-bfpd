@@ -100,10 +100,7 @@ def transform_data(data, exchange_rate):
     print('Berhasil Menghaspus Baris dengan Missing Value')
     
     # Transformasi Exchange Rate
-    data['Price_in_rupiah'] = (data['Price'] * exchange_rate).astype(int)
-    
-    # Menghapus kolom redundan
-    data = data.drop(columns=['Price'])
+    data['Price'] = (data['Price'] * exchange_rate).astype(int)
     
     # Transformasi Tipe Data
     data['Title'] = data['Title'].astype('string')

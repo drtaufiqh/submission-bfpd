@@ -1,4 +1,5 @@
 import time
+import datetime
 import requests
 
 from bs4 import BeautifulSoup
@@ -55,6 +56,7 @@ def extract_product_data(card):
         "Colors": colors,
         "Size": size,
         "Gender": gender,
+        "Timestamp": datetime.datetime.now()
     }
  
     return products
