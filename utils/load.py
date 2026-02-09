@@ -9,7 +9,7 @@ load_dotenv()
 SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_SERVICE_ACCOUNT")
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
 
-SCOPES = ['https://wgitww.googleapis.com/auth/spreadsheets']
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 credentials = Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES
