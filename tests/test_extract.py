@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch, Mock
 from utils.extract import extract_data
+import requests
 
 BASE_URL = "https://fashion-studio.dicoding.dev/"
 

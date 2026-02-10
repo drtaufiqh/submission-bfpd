@@ -41,3 +41,9 @@ def test_rating_type():
 def test_colors_type():
     df = transform_data(sample_raw_data(), 16000)
     assert df["Colors"].dtype == "int64"
+
+def test_transform_data_invalid_input():
+    df = transform_data(None, exchange_rate=16000)
+
+    assert isinstance(df, pd.DataFrame)
+    assert df.empty

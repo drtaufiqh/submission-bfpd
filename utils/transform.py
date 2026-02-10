@@ -47,7 +47,7 @@ def transform_colors(data):
     data = set_null(data, 'Colors', ['Invalid Rating'])
     
     # ubah ke int
-    data['Colors'] = data['Colors'].astype(int)
+    data['Colors'] = data['Colors'].astype("int64")
 
     return data
 
