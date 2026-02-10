@@ -104,9 +104,9 @@ def transform_data(data, exchange_rate):
         data['Price'] = (data['Price'] * exchange_rate)
         
         # Transformasi Tipe Data
-        data['Title'] = data['Title'].astype('string')
-        data['Size'] = data['Size'].astype('string')
-        data['Gender'] = data['Gender'].astype('string')
+        data['Title'] = data['Title'].astype('object')
+        data['Size'] = data['Size'].astype('object')
+        data['Gender'] = data['Gender'].astype('object')
 
         print('Berhasil Transformasi Seluruh Data!')
     

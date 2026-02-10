@@ -30,17 +30,14 @@ def test_transform_no_null():
     df = transform_data(sample_raw_data(), 16000)
     assert df.isnull().sum().sum() == 0
 
-def test_price_type():
+def test_transform_type():
     df = transform_data(sample_raw_data(), 16000)
     assert df["Price"].dtype == "float64"
-
-def test_rating_type():
-    df = transform_data(sample_raw_data(), 16000)
     assert df["Rating"].dtype == "float64"
-
-def test_colors_type():
-    df = transform_data(sample_raw_data(), 16000)
     assert df["Colors"].dtype == "int64"
+    assert df["Title"].dtype == "object"
+    assert df["Size"].dtype == "object"
+    assert df["Gender"].dtype == "object"
 
 def test_transform_data_invalid_input():
     df = transform_data(None, exchange_rate=16000)
